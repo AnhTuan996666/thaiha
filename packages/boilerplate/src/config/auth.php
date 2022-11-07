@@ -10,6 +10,11 @@ return [
             'model'  => Sebastienheyd\Boilerplate\Models\User::class,
             'table'  => 'users',
         ],
+        'products' => [
+            'driver' => 'eloquent',
+            'model'  => Sebastienheyd\Boilerplate\Models\Product::class,
+            'table'  => 'products',
+        ],
     ],
     'throttle' => [
         'maxAttempts' => 3,            // Maximum number of login attempts to allow

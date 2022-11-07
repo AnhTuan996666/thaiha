@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Sebastienheyd\Boilerplate\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class Product extends Model
     'name',
     'slug',
     'quocte_file',
-    'image_padth',
+    'image_path',
     'description',
 ];
     /**

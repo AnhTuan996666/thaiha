@@ -103,11 +103,13 @@ Route::group([
         // Route::resource('product', ProductController::class)->middleware('ability:admin,product')->except('show');
 
         // Product
-        Route::controller(ProductController::class)->prefix('product')->as('product.')->group(function () {
-            Route::get('/', 'index')->name('profile');
+        Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
+            Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('create', 'create')->name('create.post');
-            Route::post('delete', 'delete')->name('delete');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::put('edit', 'edit')->name('update');
+            Route::post('destroy/{id}', 'destroy')->name('destroy');
         });
 
         // Logs

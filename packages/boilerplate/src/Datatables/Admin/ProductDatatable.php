@@ -10,29 +10,18 @@ use Sebastienheyd\Boilerplate\Datatables\Datatable;
 
 class ProductDatatable extends Datatable
 {
-    public $slug = 'product';
+    public $slug = 'products';
 
     public function datasource()
     {
-        $productModel = config('boilerplate.auth.providers.product.model');
-
-        return $productModel::with('roles')->select([
-            'product.id',
+        return \DB::table('products')->select([
+            'id',
             'name',
             'slug',
-            'image_patd',
+            'image_path',
             'description',
-            'product.created_at',
+            'created_at',
         ]);
-    }
-
-    public function setUp()
-    {
-        $this->permissions('product_crud')
-            ->locale([
-                'deleteConfirm' => __('boilerplate::product.list.confirmdelete'),
-                'deleteSuccess' => __('boilerplate::product.list.deletesuccess'),
-            ])->order('created_at', 'desc')->stateSave();
     }
 
     public function columns(): array
@@ -54,8 +43,8 @@ class ProductDatatable extends Datatable
             ->width('40px')
             ->notSearchable()
             ->notOrderable()
-            ->data('avatar', function ($product) {
-                return '<img src="'.$product->avatar_url.'" class="img-circle" width="32" height="32" />';
+            ->data('image_path', function ($product) {
+                return '<img src="'.$product->image_path.'" class="img-circle" width="32" height="32" />';
             }),
 
             Column::add(__('Description'))
@@ -65,16 +54,16 @@ class ProductDatatable extends Datatable
             Column::add(__('Created at'))
                 ->width('12%')
                 ->data('created_at')
-                ->name('product.created_at')
+                ->name('created_at')
                 ->dateFormat(),
 
             Column::add(__(''))
                 ->width('70px')
                 ->actions(function ($product) {
 
-                    $buttons = Button::edit('boilerplate.product.edit', $product->id);
+                    $buttons = Button::edit('boilerplate.products.edit', $product->id);
 
-                    $buttons .= Button::delete('boilerplate.product.destroy', $product->id);
+                    $buttons .= Button::delete('boilerplate.products.destroy', $product->id);
 
                     return $buttons;
                 }),
