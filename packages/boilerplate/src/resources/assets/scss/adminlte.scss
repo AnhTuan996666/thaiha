@@ -1,0 +1,375 @@
+@import "~bootstrap/scss/functions";
+@import "~admin-lte/build/scss/bootstrap-variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~admin-lte/build/scss/variables";
+@import "~admin-lte/build/scss/variables-alt";
+@import "~admin-lte/build/scss/mixins";
+@import "~admin-lte/build/scss/parts/core";
+@import "~admin-lte/build/scss/parts/components";
+@import "~admin-lte/build/scss/parts/extra-components";
+@import "~admin-lte/build/scss/parts/pages";
+@import "~admin-lte/build/scss/parts/plugins";
+@import "~admin-lte/build/scss/parts/miscellaneous";
+
+// Default plugins
+@import "~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
+@import "~admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.css";
+@import "~toastr/toastr";
+
+// Toastr opacity
+#toast-container > div {
+  opacity: 1;
+  border: 0;
+  box-shadow: none;
+}
+
+$red: #dc3545;
+
+.modal-open .modal {
+  backdrop-filter: blur(2px);
+}
+
+.nav-sidebar .nav-item > .nav-link .right,
+.sidebar-mini.sidebar-collapse .nav-sidebar:hover .nav-item > .nav-link .right {
+
+}
+
+.sidebar-mini {
+  &.sidebar-collapse {
+    .sidebar {
+      .nav-sidebar {
+        .nav-item {
+          & > .nav-link {
+            .right {
+              opacity: 0;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .nav-sidebar {
+          .nav-item {
+            & > .nav-link {
+              .right {
+                transition: all 0.3s ease;
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.user-panel {
+  padding: 1rem .5rem;
+  margin: 0 -.5rem;
+  height: 3.4rem;
+
+  .info {
+    line-height: 1.1;
+    padding: 0 5px 0 10px;
+  }
+}
+
+.sidebar-is-opening .nav-sidebar .nav-link {
+  p {
+    white-space: nowrap !important;
+  }
+}
+
+// Remove dots around buttons
+:focus {
+  outline: none !important;
+}
+
+// Remove cross
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  padding-right: 0;
+  background-image: none;
+}
+
+// Less margin for labels
+label {
+  margin-bottom: .25rem
+}
+
+.nav-pills .nav-link:not(.active):hover {
+  color: #777;
+}
+
+// Brand logo with text
+.brand {
+  &-logo {
+    background: #CCC;
+    border-radius: 50%;
+    color: #333;
+    width: 2.1rem;
+    height: 2.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: .8rem;
+    margin-right: .5rem;
+    margin-top: -2px;
+    font-weight: bold;
+    position: absolute;
+  }
+
+  &-text {
+    padding-left: 3.5rem;
+  }
+}
+
+// Custom error bubble for form-control
+.error-bubble {
+  position: relative;
+  display: block;
+  margin-top: 7px;
+
+  div {
+    border-radius: 3px;
+    background: $red;
+    color: #FFF;
+    padding: 1px 10px;
+    font-size: .875rem !important;
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    border: 1px solid $red;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-bottom-color: $red;
+    border-top: 0;
+    margin-left: -7px;
+    margin-top: -7px;
+  }
+}
+
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+}
+
+.no-wrap { white-space: nowrap !important; }
+.no-shadow { box-shadow: none !important; }
+.nav-link { cursor: pointer }
+
+.sticky-toolbar {
+  position: sticky;
+  top: 57px;
+  z-index: 2;
+}
+
+.breadcrumb-item {
+  a {
+    color: #6c757d;
+  }
+}
+
+.card .card {
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+.avatar {
+  position: relative;
+  background: #6c757d;
+
+  a {
+    cursor: pointer;
+  }
+
+  &-label {
+    width:170px;
+    height: 170px;
+  }
+
+  &-img {
+    max-width: 170px;
+    max-height: 170px;
+  }
+
+  &-buttons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms ease-in-out;
+
+    .btn-group {
+      position: absolute;
+      transition: all 300ms ease-in-out;
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    &:hover {
+      background: rgba(0,0,0,.6);
+
+      .btn-group {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &-progress {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display:none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    span {
+      position: absolute;
+    }
+  }
+}
+
+aside.control-sidebar {
+  & > .btn {
+    position: absolute;
+    transform: translateX(-100%);
+    background: #343a40;
+    border-radius: 5px 0 0 5px;
+    color: #999;
+    padding-right: 3px;
+
+    &:hover {
+      color: #FFF;
+    }
+  }
+}
+
+.custom-switch label {
+  cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  tr {
+    td.visible-on-hover {
+      * {
+        opacity: 0;
+        transition: opacity 50ms ease-in-out;
+      }
+    }
+
+    &:hover {
+      td.visible-on-hover {
+        * {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.input-group-append .btn-outline-secondary {
+  border-color: #ced4da;
+}
+
+.input-group.password {
+  .input-group-append {
+    .btn {
+      border: 1px solid #ced4da;
+      border-left: 0;
+      color: #777;
+
+      &:hover {
+        color: #333 !important;
+      }
+    }
+  }
+
+  input {
+    border-right: 0;
+
+    &:focus ~ .input-group-append .btn {
+      border: 1px solid #80bdff;
+    }
+
+    &.is-invalid ~ .input-group-append .btn {
+      border-color: #dc3545 !important;
+    }
+  }
+}
+
+.input-clearable {
+  position: relative;
+
+  input {
+    position: relative;
+    padding-right: 1.5rem;
+  }
+
+  .fa {
+    position: absolute;
+    top: 50%;
+    right: .5rem;
+    z-index: 2;
+    opacity: .5;
+    cursor: pointer;
+    display: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.daterangepicker-input {
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.nav-tabs {
+  .nav-item {
+    .nav-link {
+      color: #666;
+
+      &.active {
+        color: #000;
+      }
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+}
+
+.dark-mode {
+  .daterangepicker-input {
+    color: #FFF;
+  }
+}
+
+@import "darkmode";
