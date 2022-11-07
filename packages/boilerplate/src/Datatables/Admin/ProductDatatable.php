@@ -10,20 +10,19 @@ use Sebastienheyd\Boilerplate\Datatables\Datatable;
 
 class ProductDatatable extends Datatable
 {
-    public $slug = 'products';
+    public $slug = 'product';
 
     public function datasource()
     {
-        $userModel = config('boilerplate.auth.providers.product.model');
+        $productModel = config('boilerplate.auth.providers.product.model');
 
-        return $userModel::with('roles')->select([
+        return $productModel::with('roles')->select([
             'product.id',
-            'email',
-            'last_name',
-            'first_name',
-            'active',
+            'name',
+            'slug',
+            'image_patd',
+            'description',
             'product.created_at',
-            'last_login',
         ]);
     }
 
@@ -39,53 +38,29 @@ class ProductDatatable extends Datatable
     public function columns(): array
     {
         return [
-            Column::add()
-                ->width('40px')
-                ->notSearchable()
-                ->notOrderable()
-                ->data('avatar', function ($user) {
-                    return '<img src="'.$user->avatar_url.'" class="img-circle" width="32" height="32" />';
-                }),
-
-            Column::add(__('boilerplate::product.list.state'))
-                ->width('100px')
-                ->data('active', function ($user) {
-                    $badge = '<span class="badge badge-pill badge-%s">%s</span>';
-                    if ($user->active == 1) {
-                        return sprintf($badge, 'success', __('boilerplate::product.active'));
-                    }
-
-                    return sprintf($badge, 'danger', __('boilerplate::product.inactive'));
-                })
-                ->filterOptions([__('boilerplate::product.inactive'), __('boilerplate::product.active')]),
-
-            Column::add(__('jjjjj'))
+            Column::add(__('id'))
                 ->width('12%')
-                ->data('last_name'),
+                ->data('id'),
 
-            Column::add(__('First name'))
+            Column::add(__('Name'))
                 ->width('12%')
-                ->data('first_name'),
+                ->data('name'),
 
-            Column::add(__('Email'))
+            Column::add(__('Slug'))
                 ->width('12%')
-                ->data('email'),
+                ->data('slug'),
 
-            Column::add(__('boilerplate::product.list.roles'))
-                ->notOrderable()
-                ->filter(function ($query, $q) {
-                    $query->whereHas('roles', function (Builder $query) use ($q) {
-                        $query->where('name', '=', $q);
-                    });
-                })
-                ->data('roles', function ($user) {
-                    return $user->roles->implode('display_name', ', ') ?: '-';
-                })
-                ->filterOptions(function () {
-                    $roleModel = config('boilerplate.laratrust.role');
+            Column::add(__('Image'))
+            ->width('40px')
+            ->notSearchable()
+            ->notOrderable()
+            ->data('avatar', function ($product) {
+                return '<img src="'.$product->avatar_url.'" class="img-circle" width="32" height="32" />';
+            }),
 
-                    return $roleModel::all()->pluck('display_name', 'name')->toArray();
-                }),
+            Column::add(__('Description'))
+                ->width('12%')
+                ->data('description'),
 
             Column::add(__('Created at'))
                 ->width('12%')
@@ -93,21 +68,13 @@ class ProductDatatable extends Datatable
                 ->name('product.created_at')
                 ->dateFormat(),
 
-            Column::add(__('boilerplate::product.list.lastconnect'))
-                ->width('12%')
-                ->data('last_login')
-                ->fromNow(),
-
-            Column::add()
+            Column::add(__(''))
                 ->width('70px')
-                ->actions(function ($user) {
-                    $currentUser = Auth::user();
+                ->actions(function ($product) {
 
-                    $buttons = Button::edit('boilerplate.product.edit', $user->id);
+                    $buttons = Button::edit('boilerplate.product.edit', $product->id);
 
-                    if (($currentUser->hasRole('admin') || ! $user->hasRole('admin')) && $user->id !== $currentUser->id) {
-                        $buttons .= Button::delete('boilerplate.product.destroy', $user->id);
-                    }
+                    $buttons .= Button::delete('boilerplate.product.destroy', $product->id);
 
                     return $buttons;
                 }),

@@ -17,7 +17,7 @@
         </div>
     </div>
     @component('boilerplate::card')
-        @component('boilerplate::datatable', ['name' => 'users']) @endcomponent
+        @component('boilerplate::datatable', ['name' => 'product']) @endcomponent
     @endcomponent
 @endsection
 
