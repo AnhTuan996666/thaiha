@@ -22,35 +22,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6">
-                @component('boilerplate::card', ['title' => 'boilerplate::products.informations'])
-                    @component('boilerplate::select2', ['name' => 'active', 'label' => 'boilerplate::products.status', 'minimum-results-for-search' => '-1'])
-                        <option value="1" @if (old('active', 1) == "1") selected="selected" @endif>@lang('boilerplate::products.active')</option>
-                        <option value="0" @if (old('active') == "0") selected="selected" @endif>@lang('boilerplate::products.inactive')</option>
+            <div class="col-lg-12">
+                    @component('boilerplate::card', ['title' => 'boilerplate::products.informations'])
+                        <div class="w-50 mx-auto">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-12 col-xl-6">
+                                    @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::products.name', 'autofocus' => true])@endcomponent
+                                </div>
+                                <div class="col-md-6 col-lg-12 col-xl-6">
+                                    @component('boilerplate::input', ['name' => 'slug', 'label' => 'boilerplate::products.slug'])@endcomponent
+                                </div>
+                            </div>
+                            @component('boilerplate::input', ['name' => 'description','type' => 'textarea','rows' => '4', 'label' => 'boilerplate::products.description'])@endcomponent
+                            @component('boilerplate::input', ['name' => 'image_path','type' => 'file', 'label' => 'boilerplate::products.image'])@endcomponent
+                        </div>
                     @endcomponent
-                    <div class="row">
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            @component('boilerplate::input', ['name' => 'first_name', 'label' => 'boilerplate::products.firstname', 'autofocus' => true])@endcomponent
-                        </div>
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            @component('boilerplate::input', ['name' => 'last_name', 'label' => 'boilerplate::products.lastname'])@endcomponent
-                        </div>
-                    </div>
-                    @component('boilerplate::input', ['name' => 'email', 'label' => 'boilerplate::products.email'])@endcomponent
-                @endcomponent
-            </div>
-            <div class="col-lg-6">
-                @component('boilerplate::card', ['title' => 'boilerplate::products.informations'])
-                    <div class="row">
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            @component('boilerplate::input', ['name' => 'first_name', 'label' => 'boilerplate::products.firstname', 'autofocus' => true])@endcomponent
-                        </div>
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            @component('boilerplate::input', ['name' => 'last_name', 'label' => 'boilerplate::products.lastname'])@endcomponent
-                        </div>
-                    </div>
-                    @component('boilerplate::input', ['name' => 'email', 'label' => 'boilerplate::products.email'])@endcomponent
-                @endcomponent
             </div>
         </div>
     {{ Form::close() }}

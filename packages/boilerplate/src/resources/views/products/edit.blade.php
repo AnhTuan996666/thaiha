@@ -11,7 +11,7 @@
     {{ Form::open(['route' => ['boilerplate.products.update', $product->id], 'method' => 'put', 'autocomplete' => 'off']) }}
         <div class="row">
             <div class="col-12 pb-3">
-                <a href="{{ route("boilerplate.products.index") }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::products.returntolist')">
+                <a href="{{ route('boilerplate.products.index') }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::products.returntolist')">
                     <span class="far fa-arrow-alt-circle-left text-muted"></span>
                 </a>
                 <span class="btn-group float-right">
@@ -22,16 +22,28 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 ">
                 @component('boilerplate::card', ['title' => __('boilerplate::products.informations')])
-                    <div class="row">
-                        <div class="col-md-6">
-                            @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::products.name', 'value' => $product->name])@endcomponent
+                    <div class="w-50 mx-auto">
+                        <div class="row">
+                            <div class="col-12">
+                                @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::products.name', 'value' => $product->name])@endcomponent
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            @component('boilerplate::input', ['name' => 'slug', 'label' => 'boilerplate::products.slug', 'value' => $product->slug])@endcomponent
+                        <div class="row">
+                            <div class="col-12">
+                                @component('boilerplate::input', ['name' => 'slug', 'label' => 'boilerplate::products.slug', 'value' => $product->slug])@endcomponent
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                @component('boilerplate::input', ['name' => 'description', 'label' => 'boilerplate::products.description', 'value' => $product->description])@endcomponent
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                @component('boilerplate::input', ['name' => 'image_path','type' => 'file', 'label' => 'boilerplate::products.image', 'value' => $product->image_path])@endcomponent
+                            </div>
                         </div>
                     </div>
                 @endcomponent

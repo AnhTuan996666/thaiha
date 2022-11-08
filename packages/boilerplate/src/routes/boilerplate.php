@@ -12,6 +12,7 @@ use Sebastienheyd\Boilerplate\Controllers\Select2Controller;
 use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
 use Sebastienheyd\Boilerplate\Controllers\Product\ProductController;
+use Sebastienheyd\Boilerplate\Controllers\Category\CategoriesController;
 
 
 Route::group([
@@ -99,8 +100,15 @@ Route::group([
             Route::post('avatar/delete', 'avatarDelete')->name('avatar.delete');
         });
 
-                // Product
-        // Route::resource('product', ProductController::class)->middleware('ability:admin,product')->except('show');
+         // Category
+         Route::controller(CategoriesController::class)->prefix('categories')->as('categories.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('create', 'create')->name('create.post');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::post('edit', 'update')->name('update');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
+        });
 
         // Product
         Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
@@ -108,8 +116,8 @@ Route::group([
             Route::get('create', 'create')->name('create');
             Route::post('create', 'create')->name('create.post');
             Route::get('edit/{id}', 'edit')->name('edit');
-            Route::put('edit', 'edit')->name('update');
-            Route::post('destroy/{id}', 'destroy')->name('destroy');
+            Route::post('edit', 'update')->name('update');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
         });
 
         // Logs

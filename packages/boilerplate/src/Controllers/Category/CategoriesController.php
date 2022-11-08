@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Controllers\Product;
+namespace Sebastienheyd\Boilerplate\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
-use Sebastienheyd\Boilerplate\Models\Product;
+use Sebastienheyd\Boilerplate\Models\Categories;
 
-class ProductController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of users.
@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('boilerplate::products.list');
+        return view('boilerplate::categories.list');
     }
 
     /**
@@ -37,17 +37,17 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         
-        $product = Product::insert($request->except(['_token']));
-        return view('boilerplate::products.create',[
-            'product' => $product,
+        $categorie = Categories::insert($request->except(['_token']));
+        return view('boilerplate::categories.create',[
+            'categories' => $categorie,
         ]);
     }
 
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('boilerplate::products.edit', [
-            'product' => $product,
+        $categorie = Categories::findOrFail($id);
+        return view('boilerplate::categories.edit', [
+            'categories' => $categorie,
         ]);
     }
 
@@ -62,15 +62,15 @@ class ProductController extends Controller
      */
     public function update($id, Request $request): RedirectResponse
     {
-        $product = Product::find($id);
+        $categorie = Categories::find($id);
 
         $this->$request->validate(    [
             'name'  => 'required|unique:posts|max:255',
         ]);
-        $product->update($request->all());
+        $categorie->update($request->all());
 
-        return redirect()->route('boilerplate.products', $product)
-                ->with('growl', [__('boilerplate::products.successmod'), 'success']);
+        return redirect()->route('boilerplate.categories', $categorie)
+                ->with('growl', [__('boilerplate::categories.successmod'), 'success']);
     }
 
     /**
@@ -81,7 +81,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        return response()->json(['success' => $product->delete() ?? false]);
+        $categorie = Categories::findOrFail($id);
+        return response()->json(['success' => $categorie->delete() ?? false]);
     }
 }

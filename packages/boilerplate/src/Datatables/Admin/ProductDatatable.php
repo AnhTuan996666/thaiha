@@ -14,14 +14,9 @@ class ProductDatatable extends Datatable
 
     public function datasource()
     {
-        return \DB::table('products')->select([
-            'id',
-            'name',
-            'slug',
-            'image_path',
-            'description',
-            'created_at',
-        ]);
+        return \DB::table('products')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name as cName');
     }
 
     public function columns(): array
@@ -30,7 +25,11 @@ class ProductDatatable extends Datatable
             Column::add(__('id'))
                 ->width('12%')
                 ->data('id'),
-
+            
+            Column::add(__('Category Name'))
+                ->width('12%')
+                ->data('cName'),
+            
             Column::add(__('Name'))
                 ->width('12%')
                 ->data('name'),
@@ -40,11 +39,11 @@ class ProductDatatable extends Datatable
                 ->data('slug'),
 
             Column::add(__('Image'))
-            ->width('40px')
+            ->width('50px')
             ->notSearchable()
             ->notOrderable()
             ->data('image_path', function ($product) {
-                return '<img src="'.$product->image_path.'" class="img-circle" width="32" height="32" />';
+                return '<img src="'.$product->image_path.'" class="img-circle" width="50" height="50" />';
             }),
 
             Column::add(__('Description'))
@@ -55,6 +54,12 @@ class ProductDatatable extends Datatable
                 ->width('12%')
                 ->data('created_at')
                 ->name('created_at')
+                ->dateFormat(),
+
+            Column::add(__('Updated at'))
+                ->width('12%')
+                ->data('update_at')
+                ->name('update_at')
                 ->dateFormat(),
 
             Column::add(__(''))
