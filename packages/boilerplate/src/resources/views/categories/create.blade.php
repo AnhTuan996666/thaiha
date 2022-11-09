@@ -9,6 +9,7 @@
 
 @section('content')
     {{ Form::open(['route' => 'boilerplate.categories.createPost', 'autocomplete' => 'off']) }}
+    @csrf
         <div class="row justify-content-center">
             <div class="col-12 pb-3">
                 <a href="{{ route('boilerplate.categories.index') }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::categories.returntolist')">
