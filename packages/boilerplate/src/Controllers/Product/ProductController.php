@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 use Sebastienheyd\Boilerplate\Models\Product;
+use Sebastienheyd\Boilerplate\Models\Categories;
 
 class ProductController extends Controller
 {
@@ -34,20 +35,50 @@ class ProductController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create(Request $request)
-    {
-        
-        $product = Product::insert($request->except(['_token']));
-        return view('boilerplate::products.create',[
-            'product' => $product,
+
+    public function create() {
+        $category = \DB::table('categories')->select([
+            'id',
+            'name',
+            'slug',
+            'created_at',
+        ])->get();
+        return view('boilerplate::products.create', [
+            'category' => $category
         ]);
+    }
+
+    public function createPost(Request $request)
+    {
+        if($request->has('image_path')) {
+            $file = $request->image_path;
+            $ext = $request->image_path->extension();
+            $file_name = time() .'-'.'category.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        }
+        Product::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'image_path' => $file_name ?? ''
+        ]);
+        return redirect()->route('boilerplate.products.index')
+                        ->with('growl', [__('boilerplate::products.list.successcreate'), 'success']);
     }
 
     public function edit($id)
     {
+        $category = \DB::table('categories')->select([
+            'id',
+            'name',
+            'slug',
+            'created_at',
+        ])->get();
         $product = Product::findOrFail($id);
         return view('boilerplate::products.edit', [
             'product' => $product,
+            'category' => $category
         ]);
     }
 

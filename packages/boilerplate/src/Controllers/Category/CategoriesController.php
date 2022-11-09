@@ -34,13 +34,23 @@ class CategoriesController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create(Request $request)
+    public function create()
     {
-        
-        $categorie = Categories::insert($request->except(['_token']));
-        return view('boilerplate::categories.create',[
-            'categories' => $categorie,
+        return view('boilerplate::categories.create');
+    }
+    
+    public function createPost(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'slug' => 'required',
         ]);
+        Categories::create([
+            'name' => $request->name,
+            'slug' => $request->slug
+        ]);
+        return redirect()->route('boilerplate.categories.index')
+                        ->with('growl', [__('boilerplate::categories.list.successupdate'), 'success']);
     }
 
     public function edit($id)

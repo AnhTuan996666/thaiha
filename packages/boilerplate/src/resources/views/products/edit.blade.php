@@ -6,9 +6,9 @@
         __('boilerplate::products.edit.title')
     ]
 ])
-
+@include('boilerplate::load.fileinput')
 @section('content')
-    {{ Form::open(['route' => ['boilerplate.products.update', $product->id], 'method' => 'put', 'autocomplete' => 'off']) }}
+    {{ Form::open(['route' => ['boilerplate.products.update', $product->id], 'method' => 'put', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data']) }}
         <div class="row">
             <div class="col-12 pb-3">
                 <a href="{{ route('boilerplate.products.index') }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::products.returntolist')">
@@ -27,22 +27,34 @@
                     <div class="w-50 mx-auto">
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::products.name', 'value' => $product->name])@endcomponent
+                                @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::products.name', 'id' => 'title','onkeyup' => 'ChangeToSlug()', 'value' => $product->name])@endcomponent
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'slug', 'label' => 'boilerplate::products.slug', 'value' => $product->slug])@endcomponent
+                                @component('boilerplate::input', ['name' => 'slug', 'label' => 'boilerplate::products.slug','id' => 'slug', 'value' => $product->slug])@endcomponent
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'description', 'label' => 'boilerplate::products.description', 'value' => $product->description])@endcomponent
+                                <div class="form-group">
+                                    <label>Category_id</label>
+                                    <select class="form-control">
+                                    @foreach($category as $value)
+                                        <option value="{{$value->id}}" {{$value->id== $product->category_id ? 'selected' : ''}}> {{$value->name}}</option>
+                                    @endforeach
+                                    </select>
+                                    </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'image_path','type' => 'file', 'label' => 'boilerplate::products.image', 'value' => $product->image_path])@endcomponent
+                                @component('boilerplate::input', ['name' => 'description','type' => 'textarea','rows' => '4', 'label' => 'boilerplate::products.description', 'value' => $product->description])@endcomponent
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                @component('boilerplate::input', ['name' => 'image_path','type' => 'file', 'id'=>'files' , 'label' => 'boilerplate::products.image'])@endcomponent
                             </div>
                         </div>
                     </div>

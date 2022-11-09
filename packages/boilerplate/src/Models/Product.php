@@ -13,6 +13,7 @@ class Product extends Model
     'quocte_file',
     'image_path',
     'description',
+    'category_id'
 ];
     /**
      * The table associated with the model.

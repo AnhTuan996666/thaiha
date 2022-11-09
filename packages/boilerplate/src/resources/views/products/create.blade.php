@@ -6,9 +6,9 @@
         __('boilerplate::products.create.title')
     ]
 ])
-
+@include('boilerplate::load.fileinput')
 @section('content')
-    {{ Form::open(['route' => 'boilerplate.products.create.post', 'autocomplete' => 'off']) }}
+    {{ Form::open(['route' => 'boilerplate.products.createPost', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data']) }}
         <div class="row justify-content-center">
             <div class="col-12 pb-3">
                 <a href="{{ route('boilerplate.products.index') }}" class="btn btn-default" data-toggle="tooltip" title="@lang('boilerplate::products.returntolist')">
@@ -27,14 +27,27 @@
                         <div class="w-50 mx-auto">
                             <div class="row">
                                 <div class="col-md-6 col-lg-12 col-xl-6">
-                                    @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::products.name', 'autofocus' => true])@endcomponent
+                                    @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::products.name','id' => 'title','onkeyup' => 'ChangeToSlug()', 'autofocus' => true])@endcomponent
                                 </div>
                                 <div class="col-md-6 col-lg-12 col-xl-6">
-                                    @component('boilerplate::input', ['name' => 'slug', 'label' => 'boilerplate::products.slug'])@endcomponent
+                                    @component('boilerplate::input', ['name' => 'slug','id' => 'slug', 'label' => 'boilerplate::products.slug'])@endcomponent
                                 </div>
                             </div>
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Category_id</label>
+                                    <select name="category_id" class="form-control">
+                                    <option value="" default>---Please choose---</option>
+                                        @foreach($category as $value)
+                                            <option value="{{$value->id}}"> {{$value->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                             @component('boilerplate::input', ['name' => 'description','type' => 'textarea','rows' => '4', 'label' => 'boilerplate::products.description'])@endcomponent
-                            @component('boilerplate::input', ['name' => 'image_path','type' => 'file', 'label' => 'boilerplate::products.image'])@endcomponent
+                            @component('boilerplate::input', ['name' => 'image_path','type' => 'file', 'id'=>'files' , 'label' => 'boilerplate::products.image'])@endcomponent
                         </div>
                     @endcomponent
             </div>

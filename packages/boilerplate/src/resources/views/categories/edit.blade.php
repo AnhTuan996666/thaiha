@@ -27,12 +27,12 @@
                     <div class="w-50 mx-auto">
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'name', 'label' => 'boilerplate::categories.name', 'value' => $categories->name])@endcomponent
+                                @component('boilerplate::input', ['name' => 'name','id' => 'title','onkeyup' => 'ChangeToSlug()', 'label' => 'boilerplate::categories.name', 'value' => $categories->name])@endcomponent
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'slug', 'label' => 'boilerplate::categories.slug', 'value' => $categories->slug])@endcomponent
+                                @component('boilerplate::input', ['name' => 'slug', 'id' => 'slug', 'label' => 'boilerplate::categories.slug', 'value' => $categories->slug])@endcomponent
                             </div>
                         </div>
                     </div>

@@ -101,10 +101,10 @@ Route::group([
         });
 
          // Category
-         Route::controller(CategoriesController::class)->prefix('categories')->as('categories.')->group(function () {
+        Route::controller(CategoriesController::class)->prefix('categories')->as('categories.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');
-            Route::post('create', 'create')->name('create.post');
+            Route::post('create-post', 'createPost')->name('createPost');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::post('edit', 'update')->name('update');
             Route::delete('destroy/{id}', 'destroy')->name('destroy');
@@ -114,7 +114,7 @@ Route::group([
         Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');
-            Route::post('create', 'create')->name('create.post');
+            Route::post('create-post', 'createPost')->name('createPost');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::post('edit', 'update')->name('update');
             Route::delete('destroy/{id}', 'destroy')->name('destroy');
