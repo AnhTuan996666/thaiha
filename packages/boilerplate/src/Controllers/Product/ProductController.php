@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 use Sebastienheyd\Boilerplate\Models\Product;
@@ -37,7 +38,7 @@ class ProductController extends Controller
      */
 
     public function create() {
-        $category = \DB::table('categories')->select([
+        $category = Categories::select([
             'id',
             'name',
             'slug',
@@ -50,6 +51,10 @@ class ProductController extends Controller
 
     public function createPost(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'slug' => 'required',
+        ]);
         if($request->has('image_path')) {
             $file = $request->image_path;
             $ext = $request->image_path->extension();
@@ -69,7 +74,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $category = \DB::table('categories')->select([
+        $category = Categories::select([
             'id',
             'name',
             'slug',
@@ -94,13 +99,31 @@ class ProductController extends Controller
     public function update($id, Request $request): RedirectResponse
     {
         $product = Product::find($id);
-
-        $this->$request->validate(    [
-            'name'  => 'required|unique:posts|max:255',
+        $category = Categories::select([
+            'id',
+            'name',
+            'slug',
+            'created_at',
+        ])->get();
+        if($request->has('image_path')) {
+            $description = 'uploads'.$product->image_path;
+            if(File::exists($description)) {
+                File::delete($description);
+            }
+            $file = $request->image_path;
+            $ext = $request->image_path->extension();
+            $file_name = time() .'-'.'category.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        }
+        $product->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'image_path' => $file_name ?? ''
         ]);
-        $product->update($request->all());
-
-        return redirect()->route('boilerplate.products', $product)
+        $product->update();
+        return redirect()->route('boilerplate.products.index', $product)
                 ->with('growl', [__('boilerplate::products.successmod'), 'success']);
     }
 

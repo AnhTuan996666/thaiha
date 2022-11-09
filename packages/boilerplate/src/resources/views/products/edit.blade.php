@@ -24,6 +24,7 @@
         <div class="row">
             <div class="col-12 ">
                 @component('boilerplate::card', ['title' => __('boilerplate::products.informations')])
+                @csrf
                     <div class="w-50 mx-auto">
                         <div class="row">
                             <div class="col-12">
@@ -39,7 +40,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Category_id</label>
-                                    <select class="form-control">
+                                    <select name="category_id" class="form-control">
                                     @foreach($category as $value)
                                         <option value="{{$value->id}}" {{$value->id== $product->category_id ? 'selected' : ''}}> {{$value->name}}</option>
                                     @endforeach
@@ -54,7 +55,8 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'image_path','type' => 'file', 'id'=>'files' , 'label' => 'boilerplate::products.image'])@endcomponent
+                                @component('boilerplate::input', ['name' => 'image_path','onchange'=>'previewFile(this)','type' => 'file', 'id'=>'files' , 'label' => 'boilerplate::products.image'])@endcomponent
+                                <img id="previewImg" src="{{asset('uploads/'.$product->image_path)}}" alt="Ảnh minh họa" width="100" height="100">
                             </div>
                         </div>
                     </div>

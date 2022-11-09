@@ -73,13 +73,17 @@ class CategoriesController extends Controller
     public function update($id, Request $request): RedirectResponse
     {
         $categorie = Categories::find($id);
-
-        $this->$request->validate(    [
-            'name'  => 'required|unique:posts|max:255',
+        $this->validate($request, [
+            'name' => 'required',
+            'slug' => 'required',
         ]);
-        $categorie->update($request->all());
+        $categorie->update([
+            'name' => $request->name,
+            'slug' => $request->slug
+        ]);
+        $categorie->update();
 
-        return redirect()->route('boilerplate.categories', $categorie)
+        return redirect()->route('boilerplate.categories.index', $categorie)
                 ->with('growl', [__('boilerplate::categories.successmod'), 'success']);
     }
 

@@ -106,7 +106,7 @@ Route::group([
             Route::get('create', 'create')->name('create');
             Route::post('create-post', 'createPost')->name('createPost');
             Route::get('edit/{id}', 'edit')->name('edit');
-            Route::post('edit', 'update')->name('update');
+            Route::put('update/{id}', 'update')->name('update');
             Route::delete('destroy/{id}', 'destroy')->name('destroy');
         });
 
@@ -116,7 +116,7 @@ Route::group([
             Route::get('create', 'create')->name('create');
             Route::post('create-post', 'createPost')->name('createPost');
             Route::get('edit/{id}', 'edit')->name('edit');
-            Route::post('edit', 'update')->name('update');
+            Route::put('update/{id}', 'update')->name('update');
             Route::delete('destroy/{id}', 'destroy')->name('destroy');
         });
 

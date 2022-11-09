@@ -19,17 +19,6 @@
     <script src="{{ mix('/admin-lte.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="{{ mix('/boilerplate.min.js', '/assets/vendor/boilerplate') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    @push('js') 
-        <script>
-            $(document).ready(function() {
-                $("#files").fileinput({
-                    showUpload: false,
-                    dropZoneEnabled: false,
-                    maxFileCount: 10,
-                });
-            });
-        </script>
-    @endpush
     <script language="javascript">
             function ChangeToSlug()
             {
@@ -46,21 +35,27 @@
                 slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
                 slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
                 slug = slug.replace(/đ/gi, 'd');
-                //Xóa các ký tự đặt biệt
                 slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-                //Đổi khoảng trắng thành ký tự gạch ngang
                 slug = slug.replace(/ /gi, "-");
-                //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-                //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
                 slug = slug.replace(/\-\-\-\-\-/gi, '-');
                 slug = slug.replace(/\-\-\-\-/gi, '-');
                 slug = slug.replace(/\-\-\-/gi, '-');
                 slug = slug.replace(/\-\-/gi, '-');
-                //Xóa các ký tự gạch ngang ở đầu và cuối
                 slug = '@' + slug + '@';
                 slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-                //In slug ra textbox có id “slug”
                 document.getElementById('slug').value = slug;
+            }
+        </script>
+         <script>
+            function previewFile(input){
+                var file = $("input[type=file]").get(0).files[0];
+                if(file){
+                    var reader = new FileReader();
+                    reader.onload = function(){
+                        $("#previewImg").attr("src", reader.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
             }
         </script>
 @component('boilerplate::minify')
