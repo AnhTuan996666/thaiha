@@ -42,7 +42,7 @@ class CategoriesController extends Controller
     public function createPost(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:categories',
             'slug' => 'required',
         ]);
         Categories::create([

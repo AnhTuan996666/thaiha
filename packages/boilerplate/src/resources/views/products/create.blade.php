@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                            @component('boilerplate::input', ['name' => 'description','type' => 'textarea','rows' => '4', 'label' => 'boilerplate::products.description'])@endcomponent
+                            @component('boilerplate::input', ['name' => 'description','type' => 'textarea','id' => 'tiny','rows' => '6', 'label' => 'boilerplate::products.description'])@endcomponent
                             @component('boilerplate::input', ['name' => 'image_path','onchange'=>'previewFile(this)','type' => 'file', 'id'=>'files' , 'label' => 'boilerplate::products.image'])@endcomponent
                             <img id="previewImg" src="" alt="Ảnh minh họa" width="100" height="100">
                         </div>

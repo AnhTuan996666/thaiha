@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebastienheyd\Boilerplate\Controllers\Product;
+namespace Sebastienheyd\Boilerplate\Controllers\Articles;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -16,10 +16,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
-use Sebastienheyd\Boilerplate\Models\Product;
-use Sebastienheyd\Boilerplate\Models\Categories;
+use Sebastienheyd\Boilerplate\Models\Articles;
 
-class ProductController extends Controller
+class ArticlesController extends Controller
 {
     /**
      * Display a listing of users.
@@ -28,7 +27,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('boilerplate::products.list');
+        return view('boilerplate::articles.list');
     }
 
     /**
@@ -38,52 +37,37 @@ class ProductController extends Controller
      */
 
     public function create() {
-        $category = Categories::select([
-            'id',
-            'name',
-            'slug',
-            'created_at',
-        ])->get();
-        return view('boilerplate::products.create', [
-            'category' => $category
-        ]);
+        return view('boilerplate::articles.create');
     }
 
     public function createPost(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'slug' => 'required',
+            'title' => 'required|unique:articles',
+            'excerpt'=> 'required',
         ]);
         if($request->has('image_path')) {
             $file = $request->image_path;
             $ext = $request->image_path->extension();
-            $file_name = time() .'-'.'category.'.$ext;
+            $file_name = time() .'-'.'articles.'.$ext;
             $file->move(public_path('uploads'), $file_name);
         }
-        Product::create([
-            'name' => $request->name,
+        Articles::create([
+            'title' => $request->title,
             'slug' => $request->slug,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
+            'excerpt' => $request->excerpt,
+            'body' => $request->body,
             'image_path' => $file_name ?? ''
         ]);
-        return redirect()->route('boilerplate.products.index')
-                        ->with('growl', [__('boilerplate::products.list.successcreate'), 'success']);
+        return redirect()->route('boilerplate.articles.index')
+                        ->with('growl', [__('boilerplate::articles.list.successcreate'), 'success']);
     }
 
     public function edit($id)
     {
-        $category = Categories::select([
-            'id',
-            'name',
-            'slug',
-            'created_at',
-        ])->get();
-        $product = Product::findOrFail($id);
-        return view('boilerplate::products.edit', [
-            'product' => $product,
-            'category' => $category
+        $article = Articles::findOrFail($id);
+        return view('boilerplate::articles.edit', [
+            'articles' => $article,
         ]);
     }
 
@@ -98,33 +82,27 @@ class ProductController extends Controller
      */
     public function update($id, Request $request): RedirectResponse
     {
-        $product = Product::find($id);
-        $category = Categories::select([
-            'id',
-            'name',
-            'slug',
-            'created_at',
-        ])->get();
+        $article = Articles::find($id);
         if($request->has('image_path')) {
-            $description = 'uploads'.$product->image_path;
+            $description = 'uploads'.$article->image_path;
             if(File::exists($description)) {
                 File::delete($description);
             }
             $file = $request->image_path;
             $ext = $request->image_path->extension();
-            $file_name = time() .'-'.'product.'.$ext;
+            $file_name = time() .'-'.'articles.'.$ext;
             $file->move(public_path('uploads'), $file_name);
         }
-        $product->update([
-            'name' => $request->name,
+        $article->update([
+            'title' => $request->title,
             'slug' => $request->slug,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
+            'excerpt' => $request->excerpt,
+            'body' => $request->body,
             'image_path' => $file_name ?? ''
         ]);
-        $product->update();
-        return redirect()->route('boilerplate.products.index', $product)
-                ->with('growl', [__('boilerplate::products.successmod'), 'success']);
+        $article->update();
+        return redirect()->route('boilerplate.articles.index', $article)
+                ->with('growl', [__('boilerplate::articles.successmod'), 'success']);
     }
 
     /**
@@ -135,7 +113,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        return response()->json(['success' => $product->delete() ?? false]);
+        $article = Articles::findOrFail($id);
+        return response()->json(['success' => $article->delete() ?? false]);
     }
 }

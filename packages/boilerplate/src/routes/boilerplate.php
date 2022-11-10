@@ -13,6 +13,7 @@ use Sebastienheyd\Boilerplate\Controllers\Users\RolesController;
 use Sebastienheyd\Boilerplate\Controllers\Users\UsersController;
 use Sebastienheyd\Boilerplate\Controllers\Product\ProductController;
 use Sebastienheyd\Boilerplate\Controllers\Category\CategoriesController;
+use Sebastienheyd\Boilerplate\Controllers\Articles\ArticlesController;
 
 
 Route::group([
@@ -112,6 +113,16 @@ Route::group([
 
         // Product
         Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('create-post', 'createPost')->name('createPost');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
+        });
+
+        // Articles
+        Route::controller(ArticlesController::class)->prefix('articles')->as('articles.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('create-post', 'createPost')->name('createPost');

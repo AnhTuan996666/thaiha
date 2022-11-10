@@ -18,14 +18,15 @@ use Laratrust\Middleware\LaratrustPermission;
 use Laratrust\Middleware\LaratrustRole;
 use Lavary\Menu\Facade;
 use Lavary\Menu\ServiceProvider as MenuServiceProvider;
-use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
-use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
-use Sebastienheyd\Boilerplate\Datatables\Admin\ProductDatatable;
-use Sebastienheyd\Boilerplate\Datatables\Admin\CategoryDatatable;
 use Sebastienheyd\Boilerplate\Middleware\BoilerplateImpersonate;
 use Sebastienheyd\Boilerplate\View\Composers\DatatablesComposer;
 use Sebastienheyd\Boilerplate\View\Composers\MenuComposer;
 use Sebastienheyd\Boilerplate\View\Composers\TinymceLoadComposer;
+use Sebastienheyd\Boilerplate\Datatables\Admin\RolesDatatable;
+use Sebastienheyd\Boilerplate\Datatables\Admin\UsersDatatable;
+use Sebastienheyd\Boilerplate\Datatables\Admin\ProductDatatable;
+use Sebastienheyd\Boilerplate\Datatables\Admin\CategoryDatatable;
+use Sebastienheyd\Boilerplate\Datatables\Admin\ArticleDatatable;
 
 class BoilerplateServiceProvider extends ServiceProvider
 {
@@ -326,5 +327,6 @@ class BoilerplateServiceProvider extends ServiceProvider
         app('boilerplate.datatables')->registerDatatable(UsersDatatable::class, RolesDatatable::class);
         app('boilerplate.datatables')->registerDatatable(ProductDatatable::class);
         app('boilerplate.datatables')->registerDatatable(CategoryDatatable::class);
+        app('boilerplate.datatables')->registerDatatable(ArticleDatatable::class);
     }
 }

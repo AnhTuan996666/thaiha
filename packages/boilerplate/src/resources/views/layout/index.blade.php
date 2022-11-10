@@ -46,7 +46,7 @@
                 document.getElementById('slug').value = slug;
             }
         </script>
-         <script>
+        <script>
             function previewFile(input){
                 var file = $("input[type=file]").get(0).files[0];
                 if(file){
@@ -58,6 +58,12 @@
                 }
             }
         </script>
+        @include('boilerplate::load.tinymce')
+        @push('js')
+            <script>
+                $('#tiny, #tinyOne').tinymce({});
+            </script>
+        @endpush
 @component('boilerplate::minify')
     <script>
         $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});

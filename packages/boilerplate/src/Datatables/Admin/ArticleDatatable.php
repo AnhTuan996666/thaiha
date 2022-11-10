@@ -8,15 +8,22 @@ use Sebastienheyd\Boilerplate\Datatables\Button;
 use Sebastienheyd\Boilerplate\Datatables\Column;
 use Sebastienheyd\Boilerplate\Datatables\Datatable;
 
-class ProductDatatable extends Datatable
+class ArticleDatatable extends Datatable
 {
-    public $slug = 'products';
+    public $slug = 'articles';
 
     public function datasource()
     {
-        return \DB::table('products')
-            ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.*', 'categories.name as cName');
+        return \DB::table('articles')->select([
+            'id',
+            'title',
+            'slug',
+            'body',
+            'excerpt',
+            'image_path',
+            'created_at',
+            'updated_at'
+        ]);
     }
 
     public function columns(): array
@@ -26,31 +33,33 @@ class ProductDatatable extends Datatable
                 ->width('12%')
                 ->data('id'),
             
-            Column::add(__('Category Name'))
-                ->width('12%')
-                ->data('cName'),
-            
             Column::add(__('Name'))
                 ->width('12%')
-                ->data('name'),
+                ->data('title'),
 
             Column::add(__('Slug'))
                 ->width('12%')
                 ->data('slug'),
 
+            Column::add(__('Excerpt'))
+                ->width('12%')
+                ->data('excerpt', function($article){
+                return html_entity_decode($article->excerpt);
+            }),
+            
+            Column::add(__('Description'))
+                ->width('12%')
+                ->data('body', function($article) {
+                    return html_entity_decode($article->body);
+                }),
+
             Column::add(__('Image'))
             ->width('50px')
             ->notSearchable()
             ->notOrderable()
-            ->data('image_path', function ($product) {
-                return '<img src="'.asset('uploads/'.$product->image_path).'" class="img-circle" width="50" height="50" />';
+            ->data('image_path', function ($article) {
+                return '<img src="'.asset('uploads/'.$article->image_path).'" class="img-circle" width="50" height="50" />';
             }),
-
-            Column::add(__('Description'))
-                ->width('12%')
-                ->data('description', function($product) {
-                    return html_entity_decode($product->description);   
-                }),
 
             Column::add(__('Created at'))
                 ->width('12%')
@@ -66,11 +75,11 @@ class ProductDatatable extends Datatable
 
             Column::add(__(''))
                 ->width('70px')
-                ->actions(function ($product) {
+                ->actions(function ($article) {
 
-                    $buttons = Button::edit('boilerplate.products.edit', $product->id);
+                    $buttons = Button::edit('boilerplate.articles.edit', $article->id);
 
-                    $buttons .= Button::delete('boilerplate.products.destroy', $product->id);
+                    $buttons .= Button::delete('boilerplate.articles.destroy', $article->id);
 
                     return $buttons;
                 }),
