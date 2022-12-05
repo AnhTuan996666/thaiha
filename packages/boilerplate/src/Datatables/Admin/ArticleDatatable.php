@@ -69,8 +69,8 @@ class ArticleDatatable extends Datatable
 
             Column::add(__('Updated at'))
                 ->width('12%')
-                ->data('update_at')
-                ->name('update_at')
+                ->data('updated_at')
+                ->name('updated_at')
                 ->dateFormat(),
 
             Column::add(__(''))

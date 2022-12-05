@@ -99,7 +99,7 @@ class ProductController extends Controller
     public function update($id, Request $request): RedirectResponse
     {
         $product = Product::find($id);
-        $category = Categories::select([
+        Categories::select([
             'id',
             'name',
             'slug',

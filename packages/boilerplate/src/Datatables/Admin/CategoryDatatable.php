@@ -19,6 +19,7 @@ class CategoryDatatable extends Datatable
             'name',
             'slug',
             'created_at',
+            'updated_at'
         ]);
     }
 
