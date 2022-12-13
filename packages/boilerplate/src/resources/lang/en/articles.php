@@ -50,4 +50,5 @@ return [
         'successdelavatar' => 'Profile image has been removed',
         'successupdate'    => 'The profile has been correctly updated',
     ],
+    'excerpt' => 'Excerpt',
 ];

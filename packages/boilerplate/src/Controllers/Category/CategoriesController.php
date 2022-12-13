@@ -81,7 +81,6 @@ class CategoriesController extends Controller
             'name' => $request->name,
             'slug' => $request->slug
         ]);
-        $categorie->update();
 
         return redirect()->route('boilerplate.categories.index', $categorie)
                 ->with('growl', [__('boilerplate::categories.successmod'), 'success']);
