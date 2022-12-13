@@ -98,8 +98,12 @@ class ProductController extends Controller
      */
     public function update($id, Request $request): RedirectResponse
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'slug' => 'required',
+        ]);
         $product = Product::find($id);
-        Categories::select([
+        $category = Categories::select([
             'id',
             'name',
             'slug',
@@ -114,15 +118,14 @@ class ProductController extends Controller
             $ext = $request->image_path->extension();
             $file_name = time() .'-'.'product.'.$ext;
             $file->move(public_path('uploads'), $file_name);
+            $product->update(['image_path' => $file_name ?? '']);
         }
         $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            'image_path' => $file_name ?? ''
         ]);
-        $product->update();
         return redirect()->route('boilerplate.products.index', $product)
                 ->with('growl', [__('boilerplate::products.successmod'), 'success']);
     }

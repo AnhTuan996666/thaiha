@@ -82,25 +82,28 @@ class ArticlesController extends Controller
      */
     public function update($id, Request $request): RedirectResponse
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'excerpt'=> 'required',
+        ]);
         $article = Articles::find($id);
         if($request->has('image_path')) {
             $description = 'uploads'.$article->image_path;
-            if(File::exists($description)) {
+            if(File::exists($description)){
                 File::delete($description);
             }
             $file = $request->image_path;
             $ext = $request->image_path->extension();
             $file_name = time() .'-'.'articles.'.$ext;
             $file->move(public_path('uploads'), $file_name);
+            $article->update(['image_path' => $file_name ?? '']);
         }
         $article->update([
             'title' => $request->title,
             'slug' => $request->slug,
             'excerpt' => $request->excerpt,
             'body' => $request->body,
-            'image_path' => $file_name ?? ''
         ]);
-        $article->update();
         return redirect()->route('boilerplate.articles.index', $article)
                 ->with('growl', [__('boilerplate::articles.successmod'), 'success']);
     }
