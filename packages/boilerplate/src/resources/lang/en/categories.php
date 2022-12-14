@@ -39,7 +39,8 @@ return [
         'confirmdelete' => 'Do you confirm that you want to delete this Categories ?',
         'deletesuccess' => 'The Categories has been correctly deleted',
         'deleteerror'   => 'An error occured when trying to delete the Categories',
-        'successupdate' => 'Create success'
+        'successupdate' => 'Update success',
+        'successcreate' => 'Create success'
     ],
     'profile' => [
         'title'            => 'My Categories',

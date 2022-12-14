@@ -39,7 +39,8 @@ return [
         'confirmdelete' => 'Do you confirm that you want to delete this articles ?',
         'deletesuccess' => 'The articles has been correctly deleted',
         'deleteerror'   => 'An error occured when trying to delete the articles',
-        'successupdate' => 'Create success'
+        'successupdate' => 'Update success',
+        'successcreate' => 'Create success'
     ],
     'profile' => [
         'title'            => 'My articles',

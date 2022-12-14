@@ -39,6 +39,8 @@ return [
         'confirmdelete' => 'Do you confirm that you want to delete this Product ?',
         'deletesuccess' => 'The Product has been correctly deleted',
         'deleteerror'   => 'An error occured when trying to delete the Product',
+        'successupdate' => 'Update success',
+        'successcreate' => 'Create success'
     ],
     'profile' => [
         'title'            => 'My Product',

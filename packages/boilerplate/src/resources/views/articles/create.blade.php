@@ -35,7 +35,10 @@
                             </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        @component('boilerplate::input', ['name' => 'excerpt', 'label' => 'boilerplate::articles.excerpt','id' => 'summary-ckeditor'])@endcomponent
+                                        <div class="form-group">
+                                            <label>Slug</label>
+                                            <textarea name="excerpt" id="summary-ckeditor"></textarea> 
+                                        </div>
                                     </div>
                                 </div>
                             @component('boilerplate::input', ['name' => 'body','type' => 'textarea','rows' => '4', 'id' => 'summary-ckeditor-one', 'label' => 'boilerplate::articles.description'])@endcomponent
