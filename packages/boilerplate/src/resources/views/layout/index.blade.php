@@ -58,13 +58,7 @@
                 }
             }
         </script>
-        @include('boilerplate::load.tinymce')
-        @push('js')
-            <script>
-                $('#tiny, #tinyOne').tinymce({});
-            </script>
-        @endpush
-@component('boilerplate::minify')
+    @component('boilerplate::minify')
     <script>
         $.ajaxSetup({headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'}});
         bootbox.setLocale('{{ App::getLocale() }}');
@@ -108,5 +102,10 @@
 @if(session('growl'))
     <script>growl("{!! session('growl')[0] ?? session('growl') !!}", "{{ session('growl')[1] ?? 'info' }}")</script>
 @endif
+<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'summary-ckeditor' );
+    CKEDITOR.replace( 'summary-ckeditor-one' );
+</script>
 </body>
 </html>

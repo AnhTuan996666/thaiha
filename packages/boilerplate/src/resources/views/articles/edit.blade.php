@@ -44,12 +44,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'excerpt', 'label' => 'boilerplate::articles.slug','id' => 'tiny', 'value' => $articles->excerpt])@endcomponent
+                                @component('boilerplate::input', ['name' => 'excerpt', 'label' => 'boilerplate::articles.excerpt','id' => 'summary-ckeditor', 'value' => $articles->excerpt])@endcomponent
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'body','id' => 'tinyOne','type' => 'textarea','rows' => '4', 'label' => 'boilerplate::articles.description', 'value' => $articles->body])@endcomponent
+                                @component('boilerplate::input', ['name' => 'body','id' => 'summary-ckeditor-one','type' => 'textarea','rows' => '4', 'label' => 'boilerplate::articles.description', 'value' => $articles->body])@endcomponent
                             </div>
                         </div>
                         <div class="row">

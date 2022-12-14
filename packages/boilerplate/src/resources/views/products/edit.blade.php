@@ -50,7 +50,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'description','type' => 'textarea','id' => 'tiny','rows' => '4', 'label' => 'boilerplate::products.description', 'value' => $product->description])@endcomponent
+                                @component('boilerplate::input', ['name' => 'description','type' => 'textarea','id' => 'summary-ckeditor','rows' => '4', 'label' => 'boilerplate::products.description', 'value' => $product->description])@endcomponent
                             </div>
                         </div>
                         <div class="row">
