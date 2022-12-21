@@ -43,7 +43,7 @@ class ProductDatatable extends Datatable
             ->notSearchable()
             ->notOrderable()
             ->data('image_path', function ($product) {
-                return '<img src="'.asset('uploads/'.$product->image_path).'" class="img-circle" width="50" height="50" />';
+                return '<img src="'.asset('img/'.$product->image_path).'" class="img-circle" width="50" height="50" />';
             }),
 
             Column::add(__('Description'))

@@ -12,11 +12,11 @@
 
     <div class="flex grid-cols-2 product gap-6 mt-12">
         @foreach ($products as $product)
-        <div class="w-full product-item" style="height: 302px;">
+        <div class="product-item">
             <div class="pb-4 border-b border-stone-300 font-bold text-xl text-neutral-800 product-item__name">{{ $product->name }}</div>
             <div class="mt-4 flex product-item-flex">
                 <div style="width: 200px;" class="shrink-0 product-item__img">
-                    <img src="{{ $product->image_url ?? '/img/thang-may.jpg' }}" class="bg-cover" />
+                    <img src="{{asset(empty($product->image_path) ? 'img/thang-may.jpg' : 'img/'.$product->image_path) }}"  class="bg-cover" />
                 </div>
                 <div class="flex flex-grow flex-col justify-between ml-6 product-item__information">
                     <div class="flex flex-col font-normal text-base text-zinc-500">

@@ -36,7 +36,7 @@
                 <div class="px-6 grid grid-set grid-cols-2 gap-x-2 gap-y-6 text-zinc-400 text-sm font-normal footer-news-pt">
                     @foreach ($footerArticles as $footerArticle)
                     <a class="flex" href="/">
-                        <img src="{{ $footerArticle->image_url ?? 'https://via.placeholder.com/102x81.png' }}" style="width: 102px; height: 81px;" />
+                        <img src="{{asset(empty($footerArticle->image_path) ? 'https://via.placeholder.com/102x81.png' :'img/'.$footerArticle->image_path)}}"  style="width: 102px; height: 81px;"/>
                         <div class="ml-3 flex flex-col">
                             <p class="text-brown-400 font-medium">{{ $footerArticle->created_at->format('d \T\h\á\n\g m, Y') }}</p>
                             <p class="mt-1">{{ $footerArticle->title }}</p>

@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col-12">
                                 @component('boilerplate::input', ['name' => 'image_path','onchange'=>'previewFile(this)','type' => 'file', 'id'=>'files' , 'label' => 'boilerplate::products.image'])@endcomponent
-                                <img id="previewImg" src="{{asset('uploads/'.$product->image_path)}}" alt="Ảnh minh họa" width="100" height="100">
+                                <img id="previewImg" src="{{asset('img/'.$product->image_path)}}" alt="Ảnh minh họa" width="100" height="100">
                             </div>
                         </div>
                     </div>

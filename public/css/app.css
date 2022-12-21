@@ -15,7 +15,34 @@
     left: 0;
      z-index: -1; /*Màn bóng mờ cho ảnh */
 }
-@media (max-width:768px) {
+
+.product  {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.product-item {
+    width: 49%;
+    flex: 0 0 auto;
+}
+
+.shrink-0.product-item__img img{
+    height : 325px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+@media (max-width:999px) {
+    .shrink-0.product-item__img img {
+        margin: auto;
+    }
+
+    .product-item {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
     .bg-custom {
         max-height: 600px;
         height: auto;
@@ -169,40 +196,40 @@
      }
      .box-iso-cancel__center {
         align-items: unset;
-     }
+    }
      .box-iso-cancel__center .items-baseline , .footer-coppy__icon {
-         justify-content: center;
-     }
-     .box-iso-item {
+        justify-content: center;
+    }
+    .box-iso-item {
         white-space: nowrap;
         overflow: auto;
         display: flex;
         gap: 0rem;
         align-items: unset;
         grid-template-columns: unset;
-     }
+    }
      .box-iso-item__set , .partner__img{
-         flex : 0 0 auto;
-         width: 55%;
-     }
-     .feed-back-all , .partner__item{
+        flex : 0 0 auto;
+        width: 55%;
+    }
+    .feed-back-all , .partner__item{
         grid-template-columns: unset; 
         display: flex;
         overflow: auto;
         gap: 0.5rem;
-     }
+    }
      .feed-back-item {
-         width:60% !important;
-         flex: 0 0 auto;
-     }
+        width:60% !important;
+        flex: 0 0 auto;
+    }
      .feed-back-slug {
-         height: 216px;
-         overflow: auto;
-         padding: 10px;
-         line-height: 1.3;
+        height: 216px;
+        overflow: auto;
+        padding: 10px;
+        line-height: 1.3;
      }
      .partner {
-         overflow: hidden;
+        overflow: hidden;
      }
      .partner .w-custom {
         width: 8.5rem;
@@ -235,6 +262,7 @@
      }
      .footer-grip-custom textarea {
          background : #0B0B0B;
+         color: #fff;
      }
     .footer-grip-custom .grid-cols-2{
         gap: 1rem;
@@ -303,7 +331,8 @@
     }
     .product-item {
         height: auto !important;
-    } 
+    }
+
     .product-item-flex {
         display:block;
     }

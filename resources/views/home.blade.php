@@ -18,7 +18,7 @@
                 <div class="mt-10 grid grid-cols-3 grid-set-2 gap-6 w-full">
                     @foreach ($articles as $article)
                     <div class="flex typical-projects__img flex-col" style="height: 471px;">
-                        <img src="{{ $article->image_url ?? 'https://via.placeholder.com/1000x800.png' }}" style="height: 308px;" class="bg-cover" />
+                        <img src="{{ asset(empty($article->image_path) ? 'https://via.placeholder.com/1000x800.png' : 'img/'.$article->image_path) }}"  style="height: 308px;"  class="bg-cover" />
                         <div class="font-medium text-neutral-800 typical-projects--title text-xl mt-6">{{ $article->title }}</div>
                         <div class="mt-4 font-normal text-base text-neutral-800">{!! $article->excerpt !!}</div>
                     </div>

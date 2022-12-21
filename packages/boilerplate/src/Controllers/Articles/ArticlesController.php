@@ -50,7 +50,7 @@ class ArticlesController extends Controller
             $file = $request->image_path;
             $ext = $request->image_path->extension();
             $file_name = time() .'-'.'articles.'.$ext;
-            $file->move(public_path('uploads'), $file_name);
+            $file->move(public_path('img'), $file_name);
         }
         Articles::create([
             'title' => $request->title,
@@ -95,7 +95,7 @@ class ArticlesController extends Controller
             $file = $request->image_path;
             $ext = $request->image_path->extension();
             $file_name = time() .'-'.'articles.'.$ext;
-            $file->move(public_path('uploads'), $file_name);
+            $file->move(public_path('img'), $file_name);
             $article->update(['image_path' => $file_name ?? '']);
         }
         $article->update([

@@ -58,7 +58,7 @@ class ArticleDatatable extends Datatable
             ->notSearchable()
             ->notOrderable()
             ->data('image_path', function ($article) {
-                return '<img src="'.asset('uploads/'.$article->image_path).'" class="img-circle" width="50" height="50" />';
+                return '<img src="'.asset('img/'.$article->image_path).'" class="img-circle" width="50" height="50" />';
             }),
 
             Column::add(__('Created at'))

@@ -54,12 +54,13 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'slug' => 'required',
+            'category_id' => 'required'
         ]);
         if($request->has('image_path')) {
             $file = $request->image_path;
             $ext = $request->image_path->extension();
-            $file_name = time() .'-'.'category.'.$ext;
-            $file->move(public_path('uploads'), $file_name);
+            $file_name = time() .'-'.'product.'.$ext;
+            $file->move(public_path('img'), $file_name);
         }
         Product::create([
             'name' => $request->name,
@@ -101,9 +102,10 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'slug' => 'required',
+            'category_id' => 'required',
         ]);
         $product = Product::find($id);
-        $category = Categories::select([
+        Categories::select([
             'id',
             'name',
             'slug',
@@ -117,7 +119,7 @@ class ProductController extends Controller
             $file = $request->image_path;
             $ext = $request->image_path->extension();
             $file_name = time() .'-'.'product.'.$ext;
-            $file->move(public_path('uploads'), $file_name);
+            $file->move(public_path('img'), $file_name);
             $product->update(['image_path' => $file_name ?? '']);
         }
         $product->update([
