@@ -88,7 +88,7 @@ class ArticlesController extends Controller
         ]);
         $article = Articles::find($id);
         if($request->has('image_path')) {
-            $description = 'uploads'.$article->image_path;
+            $description = 'img'.$article->image_path;
             if(File::exists($description)){
                 File::delete($description);
             }

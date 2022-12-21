@@ -112,7 +112,7 @@ class ProductController extends Controller
             'created_at',
         ])->get();
         if($request->has('image_path')) {
-            $description = 'uploads'.$product->image_path;
+            $description = 'img'.$product->image_path;
             if(File::exists($description)) {
                 File::delete($description);
             }
