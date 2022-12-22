@@ -44,7 +44,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden">
-        <div class="pt-2 pb-3 space-y-1 text-center bg-sky-800 text-gray-50">
+        <div class="pt-2 pb-3 space-y-1 text-center bg-sky-800 text-gray-50 nav-text">
             @foreach ($navigationMenu->items as $item)
             <x-responsive-nav-link :href="$item->link" :active="request()->is(ltrim($item->link, '/'))">{{ $item->text }}</x-responsive-nav-link>
             @endforeach

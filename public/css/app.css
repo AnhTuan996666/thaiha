@@ -359,5 +359,12 @@
         border: none;
         font-size: 23px;
     }
+    .nav-text a {
+        color: #fff;
+    }
+    .nav-text a:hover,
+    .nav-text a:focus,
+    .nav-text a:active  {
+        color: #000;
+    }
 }; 
-

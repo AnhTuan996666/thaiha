@@ -36,7 +36,7 @@ class ProductController extends Controller
      *
      * @return Application|Factory|View
      */
-
+    
     public function create() {
         $category = Categories::select([
             'id',
@@ -44,8 +44,8 @@ class ProductController extends Controller
             'slug',
             'created_at',
         ])->get();
-        return view('boilerplate::products.create', [
-            'category' => $category
+        return view('boilerplate::products.create',[
+            'category' => $category,
         ]);
     }
 

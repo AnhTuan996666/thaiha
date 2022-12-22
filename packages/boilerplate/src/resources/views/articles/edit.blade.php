@@ -44,7 +44,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                @component('boilerplate::input', ['name' => 'excerpt', 'label' => 'boilerplate::articles.excerpt','id' => 'summary-ckeditor', 'value' => $articles->excerpt])@endcomponent
+                                @component('boilerplate::input', ['name' => 'excerpt','type' => 'textarea', 'label' => 'boilerplate::articles.excerpt','id' => 'summary-ckeditor', 'value' => $articles->excerpt])@endcomponent
                             </div>
                         </div>
                         <div class="row">

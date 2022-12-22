@@ -40,9 +40,14 @@
                                     <select name="category_id" class="form-control">
                                     <option value="" default>---Please choose---</option>
                                         @foreach($category as $value)
-                                            <option value="{{$value->id}}"> {{$value->name}}</option>
+                                            <option value="{{ $value->id }}"> {{$value->name}}</option>
                                         @endforeach
                                     </select>
+                                    @error('category_id')
+                                    <div class="error-bubble">
+                                        <div>{{$message}}</div>
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
